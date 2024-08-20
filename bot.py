@@ -156,12 +156,10 @@ class Vivaftntod:
         return 0
 
     def cookie_dict_to_string(self, dict_cookie):
-        string_cookie = ""
-        for coek in dict_cookie.items():
-            key, value = coek
-            string_cookie = f"{key}={value}; "
-
-        return string_cookie
+        if 'ci_session' in dict_cookie:
+            return f"ci_session={dict_cookie['ci_session']};"
+        else:
+            return None
 
     def telegram_connect(self, phone, req_data=False):  # type: ignore
         if not os.path.exists(self.session_path):
